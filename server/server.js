@@ -5,6 +5,10 @@ const db = require('./db/db-connection.js');
 
 const app = express();
 
+// production env set up
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
 /* Why give yourself environment options?
    - Ask yourself, will your live production
     server have the same local changes that
@@ -17,7 +21,8 @@ app.use(cors());
 app.use(express.json());
 
 // production env set up
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /* Why do we care about this next line?
    - You need to tell your production environment
