@@ -1,23 +1,35 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const db = require('./db/db-connection.js');
+// fix cors and express imports
+import express from 'express';
+import cors from 'cors';
 
+// production env set up
+import path, {dirname} from 'path';
+import { fileURLToPath } from 'url';
+
+import db from './db/db-connection.js';
 const app = express();
+
+/* Why give yourself environment options?
+   - Ask yourself, will your live production
+    server have the same local changes that
+    you haven't pushed up yet? 
+   - Do you want it to?
+*/
 const PORT = process.env.PORT || 8080;
+
 app.use(cors());
 app.use(express.json());
 
 // production env set up
-const path = require('path');
-const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build')
-app.use(express.static(REACT_BUILD_DIR));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-// creates an endpoint for the route "/""
-app.get('/', (req, res) => {
-    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
-    // res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
-});
+/* Why do we care about this next line?
+   - You need to tell your production environment
+   which file to give to express
+*/
+const REACT_DIST_DIR = path.join(__dirname, '..', 'client/dist')
+app.use(express.static(REACT_DIST_DIR));
 
 // create the get request for students in the endpoint '/api/students'
 app.get('/api/students', async (req, res) => {
