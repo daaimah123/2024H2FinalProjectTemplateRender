@@ -28,12 +28,12 @@ const __dirname = dirname(__filename);
    - You need to tell your production environment
    which file to give to express
 */
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client')));
 
 // creates an endpoint for the route "/"; change "/" to "*" for production env
 app.get('*', (req, res) => {
     // production env set up: use a get request to tell the server exactly which file you want
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'))
+    res.sendFile(path.join(__dirname, '../client', 'index.html'))
     // res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
 });
 
