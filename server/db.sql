@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.3
--- Dumped by pg_dump version 14.2
+-- Dumped from database version 14.11 (Homebrew)
+-- Dumped by pg_dump version 14.11 (Homebrew)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: students; Type: TABLE; Schema: public; Owner: -
+-- Name: students; Type: TABLE; Schema: public; Owner: daaimahtibrey
 --
 
 CREATE TABLE public.students (
@@ -32,8 +32,10 @@ CREATE TABLE public.students (
 );
 
 
+ALTER TABLE public.students OWNER TO daaimahtibrey;
+
 --
--- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: daaimahtibrey
 --
 
 CREATE SEQUENCE public.students_id_seq
@@ -45,37 +47,42 @@ CREATE SEQUENCE public.students_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.students_id_seq OWNER TO daaimahtibrey;
+
 --
--- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: daaimahtibrey
 --
 
 ALTER SEQUENCE public.students_id_seq OWNED BY public.students.id;
 
 
 --
--- Name: students id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: students id; Type: DEFAULT; Schema: public; Owner: daaimahtibrey
 --
 
 ALTER TABLE ONLY public.students ALTER COLUMN id SET DEFAULT nextval('public.students_id_seq'::regclass);
 
 
 --
--- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: daaimahtibrey
 --
 
-COPY public.students (id, firstname, lastname, is_current) FROM stdin;
-\.
-
-
---
--- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.students_id_seq', 1, false);
+INSERT INTO public.students (id, firstname, lastname, is_current) VALUES (1, 'Alice', 'Smith', true);
+INSERT INTO public.students (id, firstname, lastname, is_current) VALUES (2, 'Bob', 'Johnson', false);
+INSERT INTO public.students (id, firstname, lastname, is_current) VALUES (3, 'Charlie', 'Brown', true);
+INSERT INTO public.students (id, firstname, lastname, is_current) VALUES (4, 'test_first', 'test_last', NULL);
+INSERT INTO public.students (id, firstname, lastname, is_current) VALUES (5, 'another_first', 'another_last', NULL);
 
 
 --
--- Name: students students_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: daaimahtibrey
+--
+
+SELECT pg_catalog.setval('public.students_id_seq', 5, true);
+
+
+--
+-- Name: students students_pkey; Type: CONSTRAINT; Schema: public; Owner: daaimahtibrey
 --
 
 ALTER TABLE ONLY public.students

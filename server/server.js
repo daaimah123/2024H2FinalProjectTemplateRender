@@ -4,18 +4,32 @@ require('dotenv').config();
 const db = require('./db/db-connection.js');
 
 const app = express();
+
+/* Why give yourself environment options?
+   - Ask yourself, will your live production
+    server have the same local changes that
+    you haven't pushed up yet? 
+   - Do you want it to?
+*/
 const PORT = process.env.PORT || 8080;
+
 app.use(cors());
 app.use(express.json());
 
 // production env set up
 const path = require('path');
-const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build')
-app.use(express.static(REACT_BUILD_DIR));
+
+/* Why do we care about this next line?
+   - You need to tell your production environment
+   which file to give to express
+*/
+const REACT_DIST_DIR = path.join(__dirname, '..', 'client', 'dist')
+app.use(express.static(REACT_DIST_DIR));
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
-    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+    // production env set up: use a get request to tell the server exactly which file you want
+    res.sendFile(path.join(REACT_DIST_DIR, 'index.html'));
     // res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
 });
 
