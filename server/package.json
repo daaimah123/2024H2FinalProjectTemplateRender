@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": " concurrently 'npm start' 'cd .. && cd client && npm run dev' ",
     "start": "nodemon server.js",
