@@ -1,13 +1,13 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const db = require('./db/db-connection.js');
-
-const app = express();
+// fix cors and express imports
+import express from 'express';
+import cors from 'cors';
 
 // production env set up
-import path, { dirname } from 'path';
+import path, {dirname} from 'path';
 import { fileURLToPath } from 'url';
+
+import db from './db/db-connection.js';
+const app = express();
 
 /* Why give yourself environment options?
    - Ask yourself, will your live production
