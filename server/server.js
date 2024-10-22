@@ -26,8 +26,8 @@ const path = require('path');
 const REACT_DIST_DIR = path.join(__dirname, '..', 'client', 'dist')
 app.use(express.static(REACT_DIST_DIR));
 
-// creates an endpoint for the route "/""
-app.get('/', (req, res) => {
+// creates an endpoint for the route "/"; change "/" to "*" for production env
+app.get('*', (req, res) => {
     // production env set up: use a get request to tell the server exactly which file you want
     res.sendFile(path.join(REACT_DIST_DIR, 'index.html'));
     // res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
